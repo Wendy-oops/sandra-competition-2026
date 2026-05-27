@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 粵港澳大灣區國際藝術體操邀請賽</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@300;400;500;700;900&family=Noto+Serif+HK:wght@400;600;700;900&display=swap');
+
+  :root {
+    --primary: #1a1a2e;
+    --accent: #c9a84c;
+    --accent-light: #e4d5a7;
+    --bg: #fafaf8;
+    --card: #ffffff;
+    --text: #2d2d2d;
+    --text-light: #6b6b6b;
+    --border: #e8e5df;
+    --gradient-start: #1a1a2e;
+    --gradient-end: #16213e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    font-family: 'Noto Sans HK', 'Noto Serif HK', -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Navigation ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif HK', serif; font-weight: 700; font-size: 16px;
+    color: var(--accent); letter-spacing: 0.05em; white-space: nowrap;
+  }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75); text-decoration: none;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .lang-btn {
+    background: transparent; border: 1px solid var(--accent); color: var(--accent);
+    padding: 6px 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+    cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    font-family: 'Noto Sans HK', -apple-system, sans-serif; white-space: nowrap;
+  }
+  .lang-btn:hover { background: rgba(201,168,76,0.12); }
+
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--accent); transition: transform 0.3s; }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 50%, #0f3460 100%);
+    position: relative; overflow: hidden; padding: 120px 32px 80px;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(201,168,76,0.04) 0%, transparent 40%);
+  }
+  .hero-particles {
+    position: absolute; inset: 0; opacity: 0.03;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero-badge {
+    display: inline-block; border: 1px solid var(--accent); color: var(--accent);
+    padding: 8px 24px; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 40px; border-radius: 2px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif HK', serif; font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900; color: #fff; letter-spacing: 0.04em; line-height: 1.35; margin-bottom: 24px;
+  }
+  .hero h1 .gold { color: var(--accent); }
+  .hero-subtitle {
+    font-size: clamp(16px, 2vw, 20px); font-weight: 300;
+    color: rgba(255,255,255,0.7); letter-spacing: 0.06em; margin-bottom: 48px;
+  }
+  .hero-info-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 48px; }
+  .hero-info-item { text-align: center; }
+  .hero-info-item .label {
+    font-size: 11px; font-weight: 500; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .hero-info-item .value { font-size: 16px; color: rgba(255,255,255,0.85); font-weight: 400; letter-spacing: 0.03em; }
+
+  .btn-primary {
+    display: inline-block; background: var(--accent); color: var(--primary);
+    padding: 14px 48px; font-size: 15px; font-weight: 700; letter-spacing: 0.08em;
+    text-decoration: none; border-radius: 2px; transition: all 0.3s; border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: #d4b65a; transform: translateY(-1px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .btn-outline {
+    display: inline-block; border: 1px solid var(--accent); color: var(--accent);
+    padding: 13px 40px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em;
+    text-decoration: none; border-radius: 2px; transition: all 0.3s; margin-left: 16px;
+  }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); border-color: #d4b65a; color: #d4b65a; }
+
+  /* ── Section ── */
+  .section { padding: 100px 32px; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 12px; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Noto Serif HK', serif; font-size: clamp(24px, 3vw, 36px);
+    font-weight: 900; color: var(--primary); letter-spacing: 0.04em; margin-bottom: 20px; line-height: 1.3;
+  }
+  .section-desc { font-size: 16px; color: var(--text-light); max-width: 680px; line-height: 1.9; margin-bottom: 48px; }
+
+  /* ── Cards ── */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  .info-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 36px 32px; border-radius: 2px; transition: box-shadow 0.3s;
+  }
+  .info-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+
+  .info-card h3 { font-family: 'Noto Serif HK', serif; font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+  .info-card p { font-size: 14px; color: var(--text-light); line-height: 1.8; }
+
+  /* ── Organizers ── */
+  .organizers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+  .organizer-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 40px 28px; text-align: center; border-radius: 2px; transition: box-shadow 0.3s;
+  }
+  .organizer-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+  .organizer-card .org-type {
+    font-size: 11px; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .organizer-card .org-name { font-family: 'Noto Serif HK', serif; font-size: 18px; font-weight: 700; color: var(--primary); line-height: 1.5; }
+  .organizer-card.org-main {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--primary), #16213e); border-color: transparent;
+  }
+  .organizer-card.org-main .org-type { color: var(--accent); }
+  .organizer-card.org-main .org-name { color: #fff; }
+
+  /* ── Tables ── */
+  .table-wrapper { overflow-x: auto; margin: 32px 0; border: 1px solid var(--border); border-radius: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead { background: var(--primary); color: #fff; }
+  thead th { padding: 16px 20px; font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-align: left; white-space: nowrap; }
+  tbody td { padding: 14px 20px; border-bottom: 1px solid var(--border); line-height: 1.6; }
+  tbody tr:nth-child(even) { background: rgba(0,0,0,0.012); }
+  tbody tr:hover { background: rgba(201,168,76,0.04); }
+
+  /* ── Fee cards ── */
+  .fee-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
+  .fee-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 36px 32px; border-radius: 2px; position: relative;
+  }
+  .fee-card.featured { border-color: var(--accent); box-shadow: 0 4px 24px rgba(201,168,76,0.1); }
+  .fee-card .fee-badge {
+    position: absolute; top: -12px; right: 24px;
+    background: var(--accent); color: var(--primary); font-size: 11px; font-weight: 700;
+    padding: 4px 16px; letter-spacing: 0.08em; border-radius: 2px;
+  }
+  .fee-card h4 { font-family: 'Noto Serif HK', serif; font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+  .fee-card .fee-amount { font-size: 32px; font-weight: 900; color: var(--accent); margin: 16px 0 4px; }
+  .fee-card .fee-amount small { font-size: 14px; font-weight: 500; color: var(--text-light); }
+  .fee-card .fee-detail { font-size: 13px; color: var(--text-light); line-height: 1.8; margin-top: 12px; }
+
+  /* ── Timeline ── */
+  .timeline { position: relative; padding-left: 32px; border-left: 2px solid var(--accent-light); margin-top: 32px; }
+  .timeline-item { position: relative; margin-bottom: 36px; padding-left: 28px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -39px; top: 4px;
+    width: 12px; height: 12px; background: var(--accent); border-radius: 50%; border: 3px solid var(--bg);
+  }
+  .timeline-item .tl-date {
+    font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 4px;
+  }
+  .timeline-item h4 { font-family: 'Noto Serif HK', serif; font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .timeline-item p { font-size: 14px; color: var(--text-light); }
+
+  /* ── Rules ── */
+  .rules-list { list-style: none; display: grid; gap: 16px; }
+  .rules-list li {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 20px 28px; border-radius: 2px; display: flex; align-items: flex-start; gap: 16px;
+    font-size: 14px; line-height: 1.7;
+  }
+  .rules-list li .rule-num {
+    flex-shrink: 0; width: 32px; height: 32px;
+    background: var(--primary); color: var(--accent); font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; border-radius: 2px;
+  }
+
+  /* ── Contact ── */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
+  .contact-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 32px; border-radius: 2px; text-align: center; transition: box-shadow 0.3s;
+  }
+  .contact-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+
+  .contact-card h4 { font-size: 14px; font-weight: 700; color: var(--primary); letter-spacing: 0.06em; margin-bottom: 8px; }
+  .contact-card .contact-value { font-size: 15px; color: var(--text-light); word-break: break-all; }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--primary); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 48px 32px; font-size: 13px; letter-spacing: 0.04em; line-height: 2;
+  }
+  .footer strong { color: var(--accent); font-weight: 600; }
+  .footer .footer-logos { display: flex; justify-content: center; gap: 48px; margin-bottom: 24px; flex-wrap: wrap; }
+  .footer .footer-logo-item {
+    font-family: 'Noto Serif HK', serif; font-size: 14px;
+    font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 0.06em;
+  }
+
+  /* ── Utils ── */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+    border-left: 3px solid var(--accent); padding: 24px 28px;
+    border-radius: 0 2px 2px 0; margin: 24px 0; font-size: 14px; color: var(--text); line-height: 1.8;
+  }
+  .highlight-box strong { color: var(--primary); }
+  .text-center { text-align: center; }
+  .mt-24 { margin-top: 24px; }
+  .mt-48 { margin-top: 48px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-32 { margin-bottom: 32px; }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none; position: absolute; top: 64px; left: 0; right: 0;
+      background: rgba(26,26,46,0.98); flex-direction: column;
+      padding: 24px 32px; gap: 16px; border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .nav-links.open { display: flex; }
+    .nav-hamburger { display: flex; }
+    .hero-info-row { gap: 20px; }
+    .hero { padding: 100px 24px 60px; }
+    .section { padding: 60px 24px; }
+    .organizers-grid { grid-template-columns: 1fr; }
+    .btn-outline { margin-left: 0; margin-top: 12px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-right { gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">GBA · RG 2026</div>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" data-i18n="nav.home">首頁</a></li>
+        <li><a href="#about" data-i18n="nav.about">賽事簡介</a></li>
+        <li><a href="#categories" data-i18n="nav.categories">組別項目</a></li>
+        <li><a href="#fees" data-i18n="nav.fees">參賽費用</a></li>
+        <li><a href="#registration" data-i18n="nav.registration">報名須知</a></li>
+        <li><a href="#awards" data-i18n="nav.awards">獎項</a></li>
+        <li><a href="#rules" data-i18n="nav.rules">重要規則</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">聯繫我們</a></li>
+      </ul>
+      <button class="lang-btn" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero" id="home">
+  <div class="hero-particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero.badge">International Invitational</div>
+    <h1>
+      2026 <span class="gold" data-i18n="hero.title_highlight">粵港澳大灣區</span><br>
+      <span data-i18n="hero.title">國際藝術體操邀請賽</span>
+    </h1>
+    <p class="hero-subtitle" data-i18n="hero.subtitle">2026 Guangdong–Hong Kong–Macao Greater Bay Area International Rhythmic Gymnastics Invitational</p>
+    <div class="hero-info-row">
+      <div class="hero-info-item"><div class="label" data-i18n="hero.date_label">比賽日期</div><div class="value" data-i18n="hero.date_value">2026 年 8 月 21 日–23 日</div></div>
+      <div class="hero-info-item"><div class="label" data-i18n="hero.venue_label">比賽地點</div><div class="value" data-i18n="hero.venue_value">廣州華商學院體育館</div></div>
+      <div class="hero-info-item"><div class="label" data-i18n="hero.deadline_label">報名截止</div><div class="value" data-i18n="hero.deadline_value">2026 年 7 月 15 日</div></div>
+    </div>
+    <a href="#registration" class="btn-primary" data-i18n="hero.cta">立即報名</a>
+    <a href="#about" class="btn-outline" data-i18n="hero.learn_more">了解更多</a>
+  </div>
+</section>
+
+<!-- ── About ── -->
+<section class="section" id="about">
+  <div class="section-label" data-i18n="about.label">About</div>
+  <h2 class="section-title" data-i18n="about.title">賽事簡介</h2>
+  <p class="section-desc" data-i18n="about.desc">2026 粵港澳大灣區國際藝術體操邀請賽是一項面向全球適齡運動員的國際級藝術體操賽事。賽事秉承「以賽促練、以賽會友」的宗旨，致力於推動大灣區及國際藝術體操運動的交流與發展。</p>
+
+  <div class="organizers-grid">
+    <div class="organizer-card org-main">
+      <div class="org-type" data-i18n="about.venue_type">比賽場地</div>
+      <div class="org-name"><span data-i18n="about.venue_name">廣州華商學院體育館</span><br><small style="font-weight:400;opacity:0.6;font-size:14px;" data-i18n="about.venue_addr">廣州市增城區荔湖街道華商路一號</small></div>
+    </div>
+    <div class="organizer-card"><div class="org-type" data-i18n="about.org_type">主辦單位</div><div class="org-name" data-i18n="about.org1">華商科教集團</div></div>
+    <div class="organizer-card"><div class="org-type" data-i18n="about.org_type">主辦單位</div><div class="org-name" data-i18n="about.org2">Sandra 藝術體操舞蹈學院（香港）</div></div>
+    <div class="organizer-card"><div class="org-type" data-i18n="about.co_org_type">承辦單位</div><div class="org-name" data-i18n="about.co_org">廣州珊德拉體育發展有限公司</div></div>
+  </div>
+
+  <div class="cards-grid mt-48">
+    <div class="info-card">
+      <h3 data-i18n="about.time_title">比賽時間</h3>
+      <p data-i18n="about.time_desc">2026 年 8 月 21 日–23 日（週五至週日）<br>每日 9:00–20:00</p>
+    </div>
+    <div class="info-card">
+      <h3 data-i18n="about.participants_title">參賽對象</h3>
+      <p data-i18n-html="about.participants_desc">全球適齡運動員均可報名，不限地區<br>限額 <strong>500 人</strong>，先報先得</p>
+    </div>
+    <div class="info-card">
+      <h3 data-i18n="about.rules_title">評分規則</h3>
+      <p data-i18n-html="about.rules_desc">採用 <strong>2025–2028 國際藝術體操評分規則</strong><br>FIG 國際體聯最新標準</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Categories ── -->
+<section class="section" id="categories" style="background:#fff;">
+  <div class="section-label" data-i18n="cat.label">Categories</div>
+  <h2 class="section-title" data-i18n="cat.title">組別與項目</h2>
+  <p class="section-desc" data-i18n="cat.desc">賽事設個人藝術體操、集體項目及藝術體操舞蹈三大類別，涵蓋各年齡段及不同難度級別。</p>
+
+  <h3 style="font-family:'Noto Serif HK',serif;font-size:22px;font-weight:700;color:var(--primary);margin-bottom:16px;" data-i18n="cat.s1_title">一、個人藝術體操</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th data-i18n="cat.t1_c1">級別</th><th data-i18n="cat.t1_c2">年齡組別</th><th data-i18n="cat.t1_c3">出生年份</th><th data-i18n="cat.t1_c4">比賽項目</th></tr></thead>
+      <tbody>
+        <tr><td><strong data-i18n="cat.t1_r1c1">新秀級 A</strong></td><td data-i18n="cat.t1_r1c2">U8 / U10 / U12</td><td data-i18n="cat.t1_r1c3">2018–2020 / 2016–2017 / 2014–2015</td><td rowspan="4" data-i18n="cat.t1_events">徒手、球、圈、棒、帶<br>單項與全能</td></tr>
+        <tr><td><strong data-i18n="cat.t1_r2c1">新秀級 B</strong></td><td data-i18n="cat.t1_r2c2">U8 / U10 / U12 / U13+</td><td data-i18n="cat.t1_r2c3">同上及 2013 及以前</td></tr>
+        <tr><td><strong data-i18n="cat.t1_r3c1">初級</strong></td><td data-i18n="cat.t1_r3c2">U8 / U10 / U12 / U13+</td><td data-i18n="cat.t1_r3c3">同上</td></tr>
+        <tr><td><strong data-i18n="cat.t1_r4c1">中級 / 高級</strong></td><td data-i18n="cat.t1_r4c2">U8 / U10 / U12 / U13+</td><td data-i18n="cat.t1_r4c3">同上</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-family:'Noto Serif HK',serif;font-size:22px;font-weight:700;color:var(--primary);margin:40px 0 16px;" data-i18n="cat.s2_title">二、集體項目（5 人以上）</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th data-i18n="cat.t2_c1">組別</th><th data-i18n="cat.t2_c2">年齡範圍</th><th data-i18n="cat.t2_c3">比賽項目</th></tr></thead>
+      <tbody>
+        <tr><td><strong data-i18n="cat.t2_r1c1">集體 A 組</strong></td><td data-i18n="cat.t2_r1c2">2015–2020 年出生</td><td data-i18n="cat.t2_r1c3">五人徒手、五人球操</td></tr>
+        <tr><td><strong data-i18n="cat.t2_r2c1">集體 B 組</strong></td><td data-i18n="cat.t2_r2c2">年齡不限</td><td data-i18n="cat.t2_r2c3">五人圈、五人棒、五人帶操</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-family:'Noto Serif HK',serif;font-size:22px;font-weight:700;color:var(--primary);margin:40px 0 16px;" data-i18n="cat.s3_title">三、藝術體操舞蹈</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th data-i18n="cat.t3_c1">形式</th><th data-i18n="cat.t3_c2">組別</th><th data-i18n="cat.t3_c3">時長要求</th></tr></thead>
+      <tbody>
+        <tr><td data-i18n="cat.t3_r1c1">單人 / 雙人 / 三人</td><td data-i18n="cat.t3_r1c2">幼兒組、兒童組、少年組、公開組</td><td data-i18n="cat.t3_r1c3">1 分 30 秒 – 2 分 30 秒</td></tr>
+        <tr><td data-i18n="cat.t3_r2c1">群舞（4 人及以上）</td><td data-i18n="cat.t3_r2c2">幼兒組、兒童組、少年組、公開組</td><td data-i18n="cat.t3_r2c3">視組別而定</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── Fees ── -->
+<section class="section" id="fees">
+  <div class="section-label" data-i18n="fees.label">Fees</div>
+  <h2 class="section-title" data-i18n="fees.title">參賽費用</h2>
+  <p class="section-desc" data-i18n="fees.desc">以下費用均為人民幣計價。保險為必繳項目，增值服務可自選。</p>
+
+  <h3 style="font-family:'Noto Serif HK',serif;font-size:20px;font-weight:700;color:var(--primary);margin-bottom:8px;" data-i18n="fees.individual_title">個人項目</h3>
+  <div class="fee-grid">
+    <div class="fee-card">
+      <h4 data-i18n="fees.basic">基礎檔</h4>
+      <div class="fee-amount">¥899 <small data-i18n="fees.per_event">/ 首項</small></div>
+      <div class="fee-detail" data-i18n="fees.basic_extra">第二項起每項 ¥380</div>
+    </div>
+    <div class="fee-card featured">
+      <div class="fee-badge" data-i18n="fees.premium_badge">尊享</div>
+      <h4 data-i18n="fees.premium">尊享檔</h4>
+      <div class="fee-amount">¥1,999 <small data-i18n="fees.per_event">/ 首項</small></div>
+      <div class="fee-detail" data-i18n="fees.premium_extra">含更多專屬服務與權益</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Noto Serif HK',serif;font-size:20px;font-weight:700;color:var(--primary);margin:40px 0 8px;" data-i18n="fees.group_title">集體項目 / 群舞</h3>
+  <div class="fee-grid">
+    <div class="fee-card">
+      <h4 data-i18n="fees.basic">基礎檔</h4>
+      <div class="fee-amount">¥1,299 <small data-i18n="fees.per_event">/ 首項</small></div>
+      <div class="fee-detail" data-i18n="fees.group_basic_extra">後續每套 ¥380</div>
+    </div>
+    <div class="fee-card featured">
+      <div class="fee-badge" data-i18n="fees.premium_badge">尊享</div>
+      <h4 data-i18n="fees.premium">尊享檔</h4>
+      <div class="fee-amount">¥2,599 <small data-i18n="fees.per_event">/ 首項</small></div>
+      <div class="fee-detail" data-i18n="fees.premium_extra">含更多專屬服務與權益</div>
+    </div>
+  </div>
+
+  <div class="highlight-box mt-48" data-i18n-html="fees.extras">
+    <strong>必繳費用：</strong>保險 ¥50 / 人<br>
+    <strong>自選增值服務：</strong>單項視頻 ¥60 / 項 ｜ 精修照片 ¥200 / 套 ｜ 照片 + 視頻套餐 ¥230 / 人
+  </div>
+</section>
+
+<!-- ── Registration ── -->
+<section class="section" id="registration" style="background:#fff;">
+  <div class="section-label" data-i18n="reg.label">Registration</div>
+  <h2 class="section-title" data-i18n="reg.title">報名須知</h2>
+  <p class="section-desc" data-i18n="reg.desc">請仔細閱讀以下關鍵時間節點及報名流程，確保順利完成報名。</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="tl-date" data-i18n="reg.t1_date">2026 年 7 月 15 日</div>
+      <h4 data-i18n="reg.t1_title">報名截止</h4>
+      <p data-i18n="reg.t1_desc">提交 Excel 報名表及轉帳憑證，逾期不予受理。限額 500 人，先報先得。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-date" data-i18n="reg.t2_date">2026 年 8 月 10 日前</div>
+      <h4 data-i18n="reg.t2_title">音樂提交截止</h4>
+      <p data-i18n="reg.t2_desc">比賽音樂 MP3 檔案發送至 info@sandragroup.org，文件名標註選手姓名及項目。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-date" data-i18n="reg.t3_date">賽前統一通知</div>
+      <h4 data-i18n="reg.t3_title">出場順序抽籤</h4>
+      <p data-i18n="reg.t3_desc">出場順序由隨機抽籤決定，賽前統一通知各參賽單位。</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Noto Serif HK',serif;font-size:20px;font-weight:700;color:var(--primary);margin:40px 0 8px;" data-i18n="reg.process_title">報名流程</h3>
+  <div class="cards-grid">
+    <div class="info-card">
+      <h3 data-i18n="reg.step1_title">填寫報名表</h3>
+      <p data-i18n="reg.step1_desc">下載並填寫 Excel 報名表，確保所有資訊準確無誤。</p>
+    </div>
+    <div class="info-card">
+      <h3 data-i18n="reg.step2_title">繳納費用</h3>
+      <p data-i18n-html="reg.step2_desc">按參賽項目計算總費用（含保險），通過銀行轉帳繳費。<br>境內 / 境外分帳戶，轉帳備註：<strong>姓名 + 項目 + 地區</strong>。</p>
+    </div>
+    <div class="info-card">
+      <h3 data-i18n="reg.step3_title">提交材料</h3>
+      <p data-i18n-html="reg.step3_desc">將 Excel 報名表 + 轉帳憑證發送至微信：<strong>+8613509008801</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Awards ── -->
+<section class="section" id="awards">
+  <div class="section-label" data-i18n="awards.label">Awards</div>
+  <h2 class="section-title" data-i18n="awards.title">獎項設置</h2>
+  <p class="section-desc" data-i18n="awards.desc">各組別均設豐富獎項，表彰優秀運動員的傑出表現。</p>
+
+  <div class="cards-grid">
+    <div class="info-card">
+      <h3 data-i18n="awards.a1_title">個人項目</h3>
+      <p data-i18n="awards.a1_desc">單項及全能均設冠、亞、季軍及第 4–8 名<br>頒發獎牌、獎狀及定製獎盃</p>
+    </div>
+    <div class="info-card">
+      <h3 data-i18n="awards.a2_title">集體項目</h3>
+      <p data-i18n="awards.a2_desc">各集體項目設冠、亞、季軍<br>頒發集體獎盃、個人獎牌及獎狀</p>
+    </div>
+    <div class="info-card">
+      <h3 data-i18n="awards.a3_title">舞蹈組別</h3>
+      <p data-i18n="awards.a3_desc">各舞蹈組別設冠、亞、季軍及第 4–8 名<br>頒發獎牌及獎狀</p>
+    </div>
+  </div>
+
+  <div class="highlight-box mt-48">
+    <strong data-i18n="awards.note_label">裁判規則：</strong><span data-i18n="awards.note">採用 2025–2028 國際藝術體操評分規則（FIG）。裁判結果為最終裁定，不接受申訴。</span>
+  </div>
+</section>
+
+<!-- ── Rules ── -->
+<section class="section" id="rules" style="background:#fff;">
+  <div class="section-label" data-i18n="rules.label">Rules</div>
+  <h2 class="section-title" data-i18n="rules.title">重要規則</h2>
+  <p class="section-desc" data-i18n="rules.desc">請所有參賽者、教練及隨行人員仔細閱讀並嚴格遵守以下賽事規則。</p>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num">1</span>
+      <div><strong data-i18n="rules.r1_title">出場順序</strong><br><span data-i18n="rules.r1_desc">出場順序由隨機抽籤決定，賽前統一通知各參賽單位。不接受任何形式的出場順序調整要求。</span></div>
+    </li>
+    <li>
+      <span class="rule-num">2</span>
+      <div><strong data-i18n="rules.r2_title">遲到處理</strong><br><span data-i18n="rules.r2_desc">運動員須在規定時間到達檢錄處。遲到超過 15 分鐘者，取消該場次參賽資格，所繳費用不予退還。</span></div>
+    </li>
+    <li>
+      <span class="rule-num">3</span>
+      <div><strong data-i18n="rules.r3_title">器械合規</strong><br><span data-i18n="rules.r3_desc">所有比賽器械須符合 FIG 國際體聯規格標準。器械不合規者，每項扣 0.5 分。</span></div>
+    </li>
+    <li>
+      <span class="rule-num">4</span>
+      <div><strong data-i18n="rules.r4_title">音樂規定</strong><br><span data-i18n="rules.r4_desc">音樂須為 MP3 格式，於 2026 年 8 月 10 日前發送至指定郵箱。音樂違規（含超時、格式不符等）每項扣 0.5 分。</span></div>
+    </li>
+    <li>
+      <span class="rule-num">5</span>
+      <div><strong data-i18n="rules.r5_title">裁判裁定</strong><br><span data-i18n="rules.r5_desc">裁判結果為最終裁定，不接受任何形式的申訴或仲裁請求。請尊重裁判及賽事工作人員。</span></div>
+    </li>
+    <li>
+      <span class="rule-num">6</span>
+      <div><strong data-i18n="rules.r6_title">安全與保險</strong><br><span data-i18n="rules.r6_desc">所有參賽者必須購買賽事保險（¥50 / 人）。賽事組委會對比賽期間發生的意外傷害不承擔責任。</span></div>
+    </li>
+  </ul>
+</section>
+
+<!-- ── Contact ── -->
+<section class="section" id="contact">
+  <div class="section-label" data-i18n="contact.label">Contact</div>
+  <h2 class="section-title" data-i18n="contact.title">聯繫方式</h2>
+  <p class="section-desc" data-i18n="contact.desc">如有任何疑問，歡迎通過以下渠道與我們聯繫。</p>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h4 data-i18n="contact.wechat">賽事微信</h4>
+      <div class="contact-value" data-i18n="contact.wechat_val">+8613509008801（張老師）</div>
+    </div>
+    <div class="contact-card">
+      <h4 data-i18n="contact.whatsapp">境外 WhatsApp</h4>
+      <div class="contact-value">+852 5272 0135<br>+852 5183 1874</div>
+    </div>
+    <div class="contact-card">
+      <h4 data-i18n="contact.email">電子郵箱</h4>
+      <div class="contact-value">info@sandragroup.org</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="footer-logos">
+    <span class="footer-logo-item">華商科教集團</span>
+    <span class="footer-logo-item">Sandra 藝術體操舞蹈學院（香港）</span>
+    <span class="footer-logo-item">廣州珊德拉體育發展有限公司</span>
+  </div>
+  <p>
+    &copy; 2026 <strong data-i18n="footer.name">粵港澳大灣區國際藝術體操邀請賽</strong> <span data-i18n="footer.org">組委會</span><br>
+    <span data-i18n="footer.subtitle">2026 Guangdong–Hong Kong–Macao Greater Bay Area International Rhythmic Gymnastics Invitational</span><br>
+    <span data-i18n="footer.rights">保留所有權利。All Rights Reserved.</span>
+  </p>
+</footer>
+
+<script>
+const i18n = {
+  zh: {
+    'nav.home': '首頁', 'nav.about': '賽事簡介', 'nav.categories': '組別項目', 'nav.fees': '參賽費用',
+    'nav.registration': '報名須知', 'nav.awards': '獎項', 'nav.rules': '重要規則', 'nav.contact': '聯繫我們',
+    'hero.badge': 'International Invitational',
+    'hero.title_highlight': '粵港澳大灣區',
+    'hero.title': '國際藝術體操邀請賽',
+    'hero.subtitle': '2026 Guangdong–Hong Kong–Macao Greater Bay Area<br>International Rhythmic Gymnastics Invitational',
+    'hero.date_label': '比賽日期', 'hero.date_value': '2026 年 8 月 21 日–23 日',
+    'hero.venue_label': '比賽地點', 'hero.venue_value': '廣州華商學院體育館',
+    'hero.deadline_label': '報名截止', 'hero.deadline_value': '2026 年 7 月 15 日',
+    'hero.cta': '立即報名', 'hero.learn_more': '了解更多',
+    'about.label': 'About', 'about.title': '賽事簡介',
+    'about.desc': '2026 粵港澳大灣區國際藝術體操邀請賽是一項面向全球適齡運動員的國際級藝術體操賽事。賽事秉承「以賽促練、以賽會友」的宗旨，致力於推動大灣區及國際藝術體操運動的交流與發展。',
+    'about.venue_type': '比賽場地', 'about.venue_name': '廣州華商學院體育館', 'about.venue_addr': '廣州市增城區荔湖街道華商路一號',
+    'about.org_type': '主辦單位', 'about.org1': '華商科教集團', 'about.org2': 'Sandra 藝術體操舞蹈學院（香港）',
+    'about.co_org_type': '承辦單位', 'about.co_org': '廣州珊德拉體育發展有限公司',
+    'about.time_title': '比賽時間', 'about.time_desc': '2026 年 8 月 21 日–23 日（週五至週日）<br>每日 9:00–20:00',
+    'about.participants_title': '參賽對象',
+    'about.participants_desc': '全球適齡運動員均可報名，不限地區<br>限額 <strong>500 人</strong>，先報先得',
+    'about.rules_title': '評分規則',
+    'about.rules_desc': '採用 <strong>2025–2028 國際藝術體操評分規則</strong><br>FIG 國際體聯最新標準',
+    'cat.label': 'Categories', 'cat.title': '組別與項目',
+    'cat.desc': '賽事設個人藝術體操、集體項目及藝術體操舞蹈三大類別，涵蓋各年齡段及不同難度級別。',
+    'cat.s1_title': '一、個人藝術體操',
+    'cat.t1_c1': '級別', 'cat.t1_c2': '年齡組別', 'cat.t1_c3': '出生年份', 'cat.t1_c4': '比賽項目',
+    'cat.t1_r1c1': '新秀級 A', 'cat.t1_r1c2': 'U8 / U10 / U12', 'cat.t1_r1c3': '2018–2020 / 2016–2017 / 2014–2015',
+    'cat.t1_r2c1': '新秀級 B', 'cat.t1_r2c2': 'U8 / U10 / U12 / U13+', 'cat.t1_r2c3': '同上及 2013 及以前',
+    'cat.t1_r3c1': '初級', 'cat.t1_r3c2': 'U8 / U10 / U12 / U13+', 'cat.t1_r3c3': '同上',
+    'cat.t1_r4c1': '中級 / 高級', 'cat.t1_r4c2': 'U8 / U10 / U12 / U13+', 'cat.t1_r4c3': '同上',
+    'cat.t1_events': '徒手、球、圈、棒、帶<br>單項與全能',
+    'cat.s2_title': '二、集體項目（5 人以上）',
+    'cat.t2_c1': '組別', 'cat.t2_c2': '年齡範圍', 'cat.t2_c3': '比賽項目',
+    'cat.t2_r1c1': '集體 A 組', 'cat.t2_r1c2': '2015–2020 年出生', 'cat.t2_r1c3': '五人徒手、五人球操',
+    'cat.t2_r2c1': '集體 B 組', 'cat.t2_r2c2': '年齡不限', 'cat.t2_r2c3': '五人圈、五人棒、五人帶操',
+    'cat.s3_title': '三、藝術體操舞蹈',
+    'cat.t3_c1': '形式', 'cat.t3_c2': '組別', 'cat.t3_c3': '時長要求',
+    'cat.t3_r1c1': '單人 / 雙人 / 三人', 'cat.t3_r1c2': '幼兒組、兒童組、少年組、公開組', 'cat.t3_r1c3': '1 分 30 秒 – 2 分 30 秒',
+    'cat.t3_r2c1': '群舞（4 人及以上）', 'cat.t3_r2c2': '幼兒組、兒童組、少年組、公開組', 'cat.t3_r2c3': '視組別而定',
+    'fees.label': 'Fees', 'fees.title': '參賽費用',
+    'fees.desc': '以下費用均為人民幣計價。保險為必繳項目，增值服務可自選。',
+    'fees.individual_title': '個人項目', 'fees.group_title': '集體項目 / 群舞',
+    'fees.basic': '基礎檔', 'fees.premium': '尊享檔', 'fees.premium_badge': '尊享', 'fees.per_event': '/ 首項',
+    'fees.basic_extra': '第二項起每項 ¥380', 'fees.group_basic_extra': '後續每套 ¥380',
+    'fees.premium_extra': '含更多專屬服務與權益',
+    'fees.extras': '<strong>必繳費用：</strong>保險 ¥50 / 人<br><strong>自選增值服務：</strong>單項視頻 ¥60 / 項 ｜ 精修照片 ¥200 / 套 ｜ 照片 + 視頻套餐 ¥230 / 人',
+    'reg.label': 'Registration', 'reg.title': '報名須知',
+    'reg.desc': '請仔細閱讀以下關鍵時間節點及報名流程，確保順利完成報名。',
+    'reg.t1_date': '2026 年 7 月 15 日', 'reg.t1_title': '報名截止',
+    'reg.t1_desc': '提交 Excel 報名表及轉帳憑證，逾期不予受理。限額 500 人，先報先得。',
+    'reg.t2_date': '2026 年 8 月 10 日前', 'reg.t2_title': '音樂提交截止',
+    'reg.t2_desc': '比賽音樂 MP3 檔案發送至 info@sandragroup.org，文件名標註選手姓名及項目。',
+    'reg.t3_date': '賽前統一通知', 'reg.t3_title': '出場順序抽籤',
+    'reg.t3_desc': '出場順序由隨機抽籤決定，賽前統一通知各參賽單位。',
+    'reg.process_title': '報名流程',
+    'reg.step1_title': '填寫報名表', 'reg.step1_desc': '下載並填寫 Excel 報名表，確保所有資訊準確無誤。',
+    'reg.step2_title': '繳納費用',
+    'reg.step2_desc': '按參賽項目計算總費用（含保險），通過銀行轉帳繳費。<br>境內 / 境外分帳戶，轉帳備註：<strong>姓名 + 項目 + 地區</strong>。',
+    'reg.step3_title': '提交材料',
+    'reg.step3_desc': '將 Excel 報名表 + 轉帳憑證發送至微信：<strong>+8613509008801</strong>',
+    'awards.label': 'Awards', 'awards.title': '獎項設置',
+    'awards.desc': '各組別均設豐富獎項，表彰優秀運動員的傑出表現。',
+    'awards.a1_title': '個人項目', 'awards.a1_desc': '單項及全能均設冠、亞、季軍及第 4–8 名<br>頒發獎牌、獎狀及定製獎盃',
+    'awards.a2_title': '集體項目', 'awards.a2_desc': '各集體項目設冠、亞、季軍<br>頒發集體獎盃、個人獎牌及獎狀',
+    'awards.a3_title': '舞蹈組別', 'awards.a3_desc': '各舞蹈組別設冠、亞、季軍及第 4–8 名<br>頒發獎牌及獎狀',
+    'awards.note_label': '裁判規則：', 'awards.note': '採用 2025–2028 國際藝術體操評分規則（FIG）。裁判結果為最終裁定，不接受申訴。',
+    'rules.label': 'Rules', 'rules.title': '重要規則',
+    'rules.desc': '請所有參賽者、教練及隨行人員仔細閱讀並嚴格遵守以下賽事規則。',
+    'rules.r1_title': '出場順序', 'rules.r1_desc': '出場順序由隨機抽籤決定，賽前統一通知各參賽單位。不接受任何形式的出場順序調整要求。',
+    'rules.r2_title': '遲到處理', 'rules.r2_desc': '運動員須在規定時間到達檢錄處。遲到超過 15 分鐘者，取消該場次參賽資格，所繳費用不予退還。',
+    'rules.r3_title': '器械合規', 'rules.r3_desc': '所有比賽器械須符合 FIG 國際體聯規格標準。器械不合規者，每項扣 0.5 分。',
+    'rules.r4_title': '音樂規定', 'rules.r4_desc': '音樂須為 MP3 格式，於 2026 年 8 月 10 日前發送至指定郵箱。音樂違規（含超時、格式不符等）每項扣 0.5 分。',
+    'rules.r5_title': '裁判裁定', 'rules.r5_desc': '裁判結果為最終裁定，不接受任何形式的申訴或仲裁請求。請尊重裁判及賽事工作人員。',
+    'rules.r6_title': '安全與保險', 'rules.r6_desc': '所有參賽者必須購買賽事保險（¥50 / 人）。賽事組委會對比賽期間發生的意外傷害不承擔責任。',
+    'contact.label': 'Contact', 'contact.title': '聯繫方式',
+    'contact.desc': '如有任何疑問，歡迎通過以下渠道與我們聯繫。',
+    'contact.wechat': '賽事微信', 'contact.wechat_val': '+8613509008801（張老師）',
+    'contact.whatsapp': '境外 WhatsApp', 'contact.email': '電子郵箱',
+    'footer.name': '粵港澳大灣區國際藝術體操邀請賽', 'footer.org': '組委會',
+    'footer.subtitle': '2026 Guangdong–Hong Kong–Macao Greater Bay Area International Rhythmic Gymnastics Invitational',
+    'footer.rights': '保留所有權利。All Rights Reserved.'
+  },
+  en: {
+    'nav.home': 'Home', 'nav.about': 'About', 'nav.categories': 'Categories', 'nav.fees': 'Fees',
+    'nav.registration': 'Registration', 'nav.awards': 'Awards', 'nav.rules': 'Rules', 'nav.contact': 'Contact',
+    'hero.badge': 'International Invitational',
+    'hero.title_highlight': 'Guangdong–Hong Kong–Macao',
+    'hero.title': 'Greater Bay Area<br>International Rhythmic Gymnastics Invitational',
+    'hero.subtitle': '2026 Guangdong–Hong Kong–Macao Greater Bay Area<br>International Rhythmic Gymnastics Invitational',
+    'hero.date_label': 'Date', 'hero.date_value': 'Aug 21–23, 2026',
+    'hero.venue_label': 'Venue', 'hero.venue_value': 'Guangzhou Huashang College Gymnasium',
+    'hero.deadline_label': 'Deadline', 'hero.deadline_value': 'Jul 15, 2026',
+    'hero.cta': 'Register Now', 'hero.learn_more': 'Learn More',
+    'about.label': 'About', 'about.title': 'About the Event',
+    'about.desc': 'The 2026 Guangdong–Hong Kong–Macao Greater Bay Area International Rhythmic Gymnastics Invitational is a world-class rhythmic gymnastics event open to eligible athletes worldwide. The competition aims to promote exchange and development of rhythmic gymnastics in the Greater Bay Area and beyond.',
+    'about.venue_type': 'Venue', 'about.venue_name': 'Guangzhou Huashang College Gymnasium', 'about.venue_addr': 'No.1 Huashang Road, Lihu Street, Zengcheng District, Guangzhou',
+    'about.org_type': 'Organizer', 'about.org1': 'Huashang Science & Education Group', 'about.org2': 'Sandra Rhythmic Gymnastics & Dance Academy (HK)',
+    'about.co_org_type': 'Co-organizer', 'about.co_org': 'Guangzhou Sandra Sports Development Co., Ltd.',
+    'about.time_title': 'Competition Time', 'about.time_desc': 'Aug 21–23, 2026 (Fri–Sun)<br>9:00–20:00 daily',
+    'about.participants_title': 'Eligibility',
+    'about.participants_desc': 'Open to all eligible athletes worldwide<br>Limited to <strong>500 participants</strong>, first come first served',
+    'about.rules_title': 'Judging System',
+    'about.rules_desc': 'Using <strong>2025–2028 FIG Rhythmic Gymnastics Code of Points</strong><br>Latest FIG standards',
+    'cat.label': 'Categories', 'cat.title': 'Categories & Disciplines',
+    'cat.desc': 'The competition features Individual Rhythmic Gymnastics, Group Events, and Rhythmic Gymnastics Dance across all age groups and difficulty levels.',
+    'cat.s1_title': '1. Individual Rhythmic Gymnastics',
+    'cat.t1_c1': 'Level', 'cat.t1_c2': 'Age Group', 'cat.t1_c3': 'Year of Birth', 'cat.t1_c4': 'Apparatus',
+    'cat.t1_r1c1': 'Novice A', 'cat.t1_r1c2': 'U8 / U10 / U12', 'cat.t1_r1c3': '2018–2020 / 2016–2017 / 2014–2015',
+    'cat.t1_r2c1': 'Novice B', 'cat.t1_r2c2': 'U8 / U10 / U12 / U13+', 'cat.t1_r2c3': 'Same as above & 2013 earlier',
+    'cat.t1_r3c1': 'Junior', 'cat.t1_r3c2': 'U8 / U10 / U12 / U13+', 'cat.t1_r3c3': 'Same as above',
+    'cat.t1_r4c1': 'Intermediate / Senior', 'cat.t1_r4c2': 'U8 / U10 / U12 / U13+', 'cat.t1_r4c3': 'Same as above',
+    'cat.t1_events': 'Freehand, Ball, Hoop, Clubs, Ribbon<br>Individual & All-Around',
+    'cat.s2_title': '2. Group Events (5+ persons)',
+    'cat.t2_c1': 'Group', 'cat.t2_c2': 'Age Range', 'cat.t2_c3': 'Apparatus',
+    'cat.t2_r1c1': 'Group A', 'cat.t2_r1c2': 'Born 2015–2020', 'cat.t2_r1c3': '5 Freehand, 5 Ball',
+    'cat.t2_r2c1': 'Group B', 'cat.t2_r2c2': 'No age limit', 'cat.t2_r2c3': '5 Hoop, 5 Clubs, 5 Ribbon',
+    'cat.s3_title': '3. Rhythmic Gymnastics Dance',
+    'cat.t3_c1': 'Format', 'cat.t3_c2': 'Category', 'cat.t3_c3': 'Duration',
+    'cat.t3_r1c1': 'Solo / Duo / Trio', 'cat.t3_r1c2': 'Toddler, Children, Junior, Open', 'cat.t3_r1c3': '1 min 30 s – 2 min 30 s',
+    'cat.t3_r2c1': 'Group Dance (4+)', 'cat.t3_r2c2': 'Toddler, Children, Junior, Open', 'cat.t3_r2c3': 'Category-dependent',
+    'fees.label': 'Fees', 'fees.title': 'Participation Fees',
+    'fees.desc': 'All fees are in RMB. Insurance is mandatory. Add-on services are optional.',
+    'fees.individual_title': 'Individual Events', 'fees.group_title': 'Group Events / Dance',
+    'fees.basic': 'Basic', 'fees.premium': 'Premium', 'fees.premium_badge': 'PREMIUM', 'fees.per_event': '/ 1st event',
+    'fees.basic_extra': '¥380 per additional event', 'fees.group_basic_extra': '¥380 per additional routine',
+    'fees.premium_extra': 'Includes exclusive services & benefits',
+    'fees.extras': '<strong>Mandatory Fee:</strong> Insurance ¥50 / person<br><strong>Optional Add-ons:</strong> Single-event video ¥60 / event ｜ Retouched photos ¥200 / set ｜ Photo + Video package ¥230 / person',
+    'reg.label': 'Registration', 'reg.title': 'Registration Guide',
+    'reg.desc': 'Please read the following key dates and registration procedures carefully.',
+    'reg.t1_date': 'Jul 15, 2026', 'reg.t1_title': 'Registration Deadline',
+    'reg.t1_desc': 'Submit the Excel registration form and transfer receipt. Late submissions will not be accepted. Limited to 500 participants, first come first served.',
+    'reg.t2_date': 'By Aug 10, 2026', 'reg.t2_title': 'Music Submission Deadline',
+    'reg.t2_desc': 'Submit competition music in MP3 format to info@sandragroup.org. Label files with athlete name and event.',
+    'reg.t3_date': 'Notification before competition', 'reg.t3_title': 'Order of Performance Draw',
+    'reg.t3_desc': 'Performance order is determined by random draw. All participating units will be notified before the competition.',
+    'reg.process_title': 'Registration Process',
+    'reg.step1_title': 'Complete Registration Form', 'reg.step1_desc': 'Download and fill out the Excel registration form. Ensure all information is accurate.',
+    'reg.step2_title': 'Pay Fees',
+    'reg.step2_desc': 'Calculate total fees (including insurance) and pay via bank transfer.<br>Separate accounts for domestic/international. Remarks: <strong>Name + Event + Region</strong>.',
+    'reg.step3_title': 'Submit Materials',
+    'reg.step3_desc': 'Send the Excel form + transfer receipt via WeChat: <strong>+8613509008801</strong>',
+    'awards.label': 'Awards', 'awards.title': 'Awards',
+    'awards.desc': 'Rich awards in every category to recognize outstanding performance.',
+    'awards.a1_title': 'Individual Events', 'awards.a1_desc': 'Champion, 1st & 2nd Runner-up, 4th–8th place for both individual apparatus & all-around<br>Medals, certificates & custom trophies',
+    'awards.a2_title': 'Group Events', 'awards.a2_desc': 'Champion, 1st & 2nd Runner-up<br>Group trophy, individual medals & certificates',
+    'awards.a3_title': 'Dance Categories', 'awards.a3_desc': 'Champion, 1st & 2nd Runner-up, 4th–8th place<br>Medals & certificates',
+    'awards.note_label': 'Judging: ', 'awards.note': 'Using the 2025–2028 FIG Code of Points. Judges\' decisions are final and not subject to appeal.',
+    'rules.label': 'Rules', 'rules.title': 'Important Rules',
+    'rules.desc': 'All participants, coaches, and accompanying personnel must read and strictly follow the competition rules.',
+    'rules.r1_title': 'Order of Performance', 'rules.r1_desc': 'Performance order is determined by random draw and announced before competition. No requests for changes will be accepted.',
+    'rules.r2_title': 'Late Arrival', 'rules.r2_desc': 'Athletes must arrive at the check-in area on time. Those more than 15 minutes late will be disqualified with no refund.',
+    'rules.r3_title': 'Apparatus Compliance', 'rules.r3_desc': 'All apparatus must comply with FIG specifications. Non-compliant apparatus will incur a 0.5 point deduction per event.',
+    'rules.r4_title': 'Music Regulations', 'rules.r4_desc': 'Music must be in MP3 format and submitted to the designated email by Aug 10, 2026. Music violations (time limit, format, etc.) incur a 0.5 point deduction per event.',
+    'rules.r5_title': 'Final Decision', 'rules.r5_desc': 'Judges\' decisions are final. No appeals or arbitration requests will be accepted. Please respect judges and event staff.',
+    'rules.r6_title': 'Safety & Insurance', 'rules.r6_desc': 'All participants must purchase event insurance (¥50/person). The organizing committee is not liable for accidental injuries during the competition.',
+    'contact.label': 'Contact', 'contact.title': 'Contact Us',
+    'contact.desc': 'For any inquiries, please reach out through the following channels.',
+    'contact.wechat': 'WeChat', 'contact.wechat_val': '+8613509008801 (Ms. Zhang)',
+    'contact.whatsapp': 'WhatsApp (International)', 'contact.email': 'Email',
+    'footer.name': 'Guangdong–Hong Kong–Macao Greater Bay Area International Rhythmic Gymnastics Invitational', 'footer.org': 'Organizing Committee',
+    'footer.subtitle': '2026 Guangdong–Hong Kong–Macao Greater Bay Area International Rhythmic Gymnastics Invitational',
+    'footer.rights': 'All Rights Reserved.'
+  }
+};
+
+let currentLang = 'zh';
+
+function toggleLang() {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  applyLang();
+}
+
+function applyLang() {
+  const btn = document.getElementById('langToggle');
+  btn.textContent = currentLang === 'zh' ? 'EN' : '中文';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[currentLang][key]) el.textContent = i18n[currentLang][key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (i18n[currentLang][key]) el.innerHTML = i18n[currentLang][key];
+  });
+
+  document.documentElement.lang = currentLang === 'zh' ? 'zh-HK' : 'en';
+}
+</script>
+
+</body>
+</html>
